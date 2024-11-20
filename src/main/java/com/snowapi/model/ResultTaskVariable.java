@@ -7,10 +7,10 @@ import lombok.Getter;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
-public class Result {
-    Task [] result;
+public class ResultTaskVariable {
+    TaskVariable [] result;
 
-    public Task[] getResult() {
+    public TaskVariable[] getResult() {
         return result;
     }
 }

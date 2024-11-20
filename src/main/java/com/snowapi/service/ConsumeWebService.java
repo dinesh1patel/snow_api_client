@@ -1,9 +1,7 @@
 package com.snowapi.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snowapi.model.Result;
-import com.snowapi.model.Task;
+import com.snowapi.model.ResultTask;
+import com.snowapi.model.ResultTaskVariable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,7 +33,7 @@ public class ConsumeWebService {
         this.password = password;
     }
 
-    public Result getTasksAssignedToCFTL2()
+    public ResultTask getTasksAssignedToCFTL2()
     {
         String target = "https://mojcppprod.service-now.com/api/now/table/sc_task";
 
@@ -54,10 +52,10 @@ public class ConsumeWebService {
 
         Gson gson = new Gson();
 
-        return gson.fromJson(json, Result.class);
+        return gson.fromJson(json, ResultTask.class);
     }
 
-    public Result getAllVariablesForRITMs(String requestItemId)
+    public ResultTaskVariable getAllVariablesForRITMs(String requestItemId)
     {
         String target = "https://mojcppprod.service-now.com/api/now/table/sc_req_item";
 
@@ -73,10 +71,11 @@ public class ConsumeWebService {
         ResponseEntity<String> out = restTemplate.exchange(builder.toUriString(),HttpMethod.GET, requestEntity,
                 String.class);
         String json =  out.getBody();
+        json = json.replaceAll("variables.","variables_");
 
         Gson gson = new Gson();
 
-        return gson.fromJson(json, Result.class);
+        return gson.fromJson(json, ResultTaskVariable.class);
     }
 
     private HttpHeaders getHttpHeaders() {

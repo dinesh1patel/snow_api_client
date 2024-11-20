@@ -1,7 +1,9 @@
 package com.snowapi.client;
 
-import com.snowapi.model.Result;
+import com.snowapi.model.ResultTask;
+import com.snowapi.model.ResultTaskVariable;
 import com.snowapi.model.Task;
+import com.snowapi.model.TaskVariable;
 import com.snowapi.service.ConsumeWebService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,16 @@ public class ClientApplication implements CommandLineRunner {
 				applicationParams.getSnowPassword()
 		);
 
-		Result resultAllTasks = consumeWebService.getTasksAssignedToCFTL2();
+		ResultTask resultAllTasks = consumeWebService.getTasksAssignedToCFTL2();
 		Task[] tasks = resultAllTasks.getResult();
 		for (Task task : tasks) {
-			System.out.println(task.getNumber());
-			//System.out.println(task.getRequest().getLink());
-			//System.out.println(task.getRequest().getValue());
-			System.out.println(task.getRequest_item().getLink());
-			System.out.println(task.getRequest_item().getValue());
+			System.out.println("Task ->" + task.getNumber());
+			ResultTaskVariable variable = consumeWebService.getAllVariablesForRITMs(task.getRequest_item().getValue());
+			for (TaskVariable taskVariable : variable.getResult()) {
+				System.out.println("RITM -> " + taskVariable.getNumber());
+				System.out.println("Request Type -> " +taskVariable.getVariables_request_type());
+				System.out.println("RITM sys_id -> " + taskVariable.getSys_id());
+			}
 		}
 
 		long endTime = System.currentTimeMillis();

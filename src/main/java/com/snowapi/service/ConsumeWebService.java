@@ -43,7 +43,7 @@ public class ConsumeWebService {
         UriComponents builder = UriComponentsBuilder.fromHttpUrl(target)
                 .queryParam("sysparm_query","assigned_toISEMPTY")
                 .queryParam("assignment_group","8b2cacecdbc8b8905729e25cd39619fa")
-                //.queryParam("state","1")
+                .queryParam("state","1")
                 .build();
 
         ResponseEntity<String> out = restTemplate.exchange(builder.toUriString(),HttpMethod.GET, requestEntity,

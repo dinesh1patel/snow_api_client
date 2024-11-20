@@ -43,10 +43,13 @@ public class ClientApplication implements CommandLineRunner {
 			System.out.println("Task ->" + task.getNumber());
 			ResultTaskVariable variable = consumeWebService.getAllVariablesForRITMs(task.getRequest_item().getValue());
 			for (TaskVariable taskVariable : variable.getResult()) {
-				System.out.println("RITM -> " + taskVariable.getNumber());
-				System.out.println("Request Type -> " +taskVariable.getVariables_request_type());
-				System.out.println("RITM sys_id -> " + taskVariable.getSys_id());
+				//System.out.println("RITM -> " + taskVariable.getNumber());
+				//System.out.println("Request Type -> " +taskVariable.getVariables_request_type());
+				//System.out.println("RITM sys_id -> " + taskVariable.getSys_id());
+				//System.out.println(taskVariable.getVariables_ccd_account_profile_add();
+				System.out.println(taskVariable);
 			}
+			System.out.println("-------------------------------------------------");
 		}
 
 		long endTime = System.currentTimeMillis();

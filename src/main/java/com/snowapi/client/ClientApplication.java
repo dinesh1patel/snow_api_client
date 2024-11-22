@@ -37,7 +37,7 @@ public class ClientApplication implements CommandLineRunner {
 				applicationParams.getSnowPassword()
 		);
 
-		ResultTask resultAllTasks = consumeWebService.getTasksAssignedToCFTL2();
+        ResultTask resultAllTasks = consumeWebService.getTasksAssignedToCFTL2();
 		Task[] tasks = resultAllTasks.getResult();
 		for (Task task : tasks) {
 			System.out.println("Task ->" + task.getNumber());

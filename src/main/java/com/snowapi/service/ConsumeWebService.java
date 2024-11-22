@@ -2,17 +2,22 @@ package com.snowapi.service;
 
 import com.snowapi.model.ResultTask;
 import com.snowapi.model.ResultTaskVariable;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.*;
 
 @Service
@@ -76,6 +81,40 @@ public class ConsumeWebService {
         Gson gson = new Gson();
 
         return gson.fromJson(json, ResultTaskVariable.class);
+    }
+
+    public String uploadAttachment(String sys_id, String file) throws Exception {
+
+        String target = "https://mojcppprod.service-now.com/api/now/attachment/upload";
+
+        HttpHeaders headers = getHttpHeaders();
+
+        // ContentType
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+
+        // Common form parameters.
+        multipartBodyBuilder.part("table_name", "incident");
+        multipartBodyBuilder.part("table_sys_id", sys_id);
+
+        // Load a file from disk.
+        Resource file1 = new FileSystemResource(file);
+        multipartBodyBuilder.part("uploadFile", file1, MediaType.TEXT_PLAIN);
+
+        // multipart/form-data request body
+        MultiValueMap<String, HttpEntity<?>> multipartBody = multipartBodyBuilder.build();
+
+        // The complete http request body.
+        HttpEntity<MultiValueMap<String, HttpEntity<?>>> httpEntity = new HttpEntity<>(multipartBody, headers);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(target,
+                httpEntity,
+                String.class);
+
+        System.out.println(responseEntity);
+
+        return "" + responseEntity;
     }
 
     private HttpHeaders getHttpHeaders() {

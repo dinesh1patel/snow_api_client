@@ -38,6 +38,26 @@ public class ConsumeWebService {
         this.password = password;
     }
 
+    public ResultTask getTaskBySysId(String sys_id)
+    {
+        String target = "https://mojcppprod.service-now.com/api/now/table/task";
+
+        HttpHeaders headers = getHttpHeaders();
+        HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+
+        UriComponents builder = UriComponentsBuilder.fromHttpUrl(target)
+                .queryParam("sysparm_query","sys_id="+sys_id)
+                .build();
+
+        ResponseEntity<String> out = restTemplate.exchange(builder.toUriString(),HttpMethod.GET, requestEntity,
+                String.class);
+        String json =  out.getBody();
+
+        Gson gson = new Gson();
+
+        return gson.fromJson(json, ResultTask.class);
+    }
+
     public ResultTask getTasksAssignedToCFTL2()
     {
         String target = "https://mojcppprod.service-now.com/api/now/table/sc_task";
@@ -95,7 +115,7 @@ public class ConsumeWebService {
         MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
 
         // Common form parameters.
-        multipartBodyBuilder.part("table_name", "incident");
+        multipartBodyBuilder.part("table_name", "task");
         multipartBodyBuilder.part("table_sys_id", sys_id);
 
         // Load a file from disk.

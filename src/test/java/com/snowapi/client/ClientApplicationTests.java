@@ -31,7 +31,7 @@ class ClientApplicationTests {
 				applicationParams.getSnowPassword()
 		);
 
-		String result = consumeWebService.uploadAttachment("c1175c551b821e50923afb25464bcbb5", "/Users/dineshpatel/Downloads/test.txt");
+		String result = consumeWebService.uploadAttachment("c89862d51b065e50923afb25464bcbd0", "/Users/dineshpatel/Downloads/test.txt");
 		assert result.contains("CREATED");
 	}
 

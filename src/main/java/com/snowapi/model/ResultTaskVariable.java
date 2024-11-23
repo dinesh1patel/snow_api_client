@@ -32,6 +32,11 @@ public class ResultTaskVariable {
         String variables_var_set_user_to_mirror;
         String variables_ccd_account_date_required_by;
         String variables_surname;
+        String variables_firstname;
+
+        public String getVariables_firstname() {
+            return variables_firstname;
+        }
 
         public String getVariables_ccd_account_profile_add() {
             return variables_ccd_account_profile_add;

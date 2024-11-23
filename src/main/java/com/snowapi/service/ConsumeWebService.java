@@ -1,5 +1,6 @@
 package com.snowapi.service;
 
+import com.snowapi.constants.Constants;
 import com.snowapi.model.ResultTask;
 import com.snowapi.model.ResultTaskVariable;
 import org.springframework.core.io.FileSystemResource;
@@ -67,7 +68,7 @@ public class ConsumeWebService {
 
         UriComponents builder = UriComponentsBuilder.fromHttpUrl(target)
                 .queryParam("sysparm_query","assigned_toISEMPTY")
-                .queryParam("assignment_group","8b2cacecdbc8b8905729e25cd39619fa")
+                .queryParam("assignment_group", Constants.assignment_group_id)
                 .queryParam("state","1")
                 .build();
 
@@ -88,7 +89,21 @@ public class ConsumeWebService {
         HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 
         UriComponents builder = UriComponentsBuilder.fromHttpUrl(target)
-                .queryParam("sysparm_fields","number, sys_id, variables.request_type,variables.ccd_account_profile_add,variables.email,variables.ccd_account_amend_type,variables.var_set_user_to_mirror,variables.ccd_account_date_required_by,variables.ccd_account_jurisdiction,variable.firstname,variables.surname,variable.ccd_account_urgency,variables.ccd_account_new_first_name,variables.ccd_account_profile_remove_roles,variables.ccd_account_new_email_address,variables.ccd_account_new_surname")
+                .queryParam("sysparm_fields","number, sys_id, " +
+                        "variables.request_type," +
+                        "variables.ccd_account_profile_add," +
+                        "variables.email," +
+                        "variables.ccd_account_amend_type," +
+                        "variables.var_set_user_to_mirror," +
+                        "variables.ccd_account_date_required_by," +
+                        "variables.ccd_account_jurisdiction," +
+                        "variables.firstname," +
+                        "variables.surname," +
+                        "variables.ccd_account_urgency," +
+                        "variables.ccd_account_new_first_name," +
+                        "variables.ccd_account_profile_remove_roles," +
+                        "variables.ccd_account_new_email_address," +
+                        "variables.ccd_account_new_surname")
                 .queryParam("sysparm_query","sys_id="+requestItemId)
                 .queryParam("sysparm_display_value","true")
                 .build();

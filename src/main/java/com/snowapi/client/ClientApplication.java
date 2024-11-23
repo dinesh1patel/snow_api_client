@@ -39,13 +39,27 @@ public class ClientApplication implements CommandLineRunner {
 		ResultTask.Task[] tasks = resultAllTasks.getResult();
 		for (ResultTask.Task task : tasks) {
 			System.out.println("Task Number ->" + task.getNumber());
-			System.out.println("Task SYS_ID ->" + task.getSys_id());
+			System.out.println("Task sys_id ->" + task.getSys_id());
 			ResultTaskVariable variable = consumeWebService.getAllVariablesForRITMs(task.getRequest_item().getValue());
 			for (ResultTaskVariable.TaskVariable taskVariable : variable.getResult()) {
-				System.out.println("RITM -> " + taskVariable.getNumber());
-				System.out.println("Request Type -> " +taskVariable.getVariables_request_type());
-				System.out.println("RITM sys_id -> " + taskVariable.getSys_id());
+				System.out.println("RITM number  -> " + taskVariable.getNumber());
+				System.out.println("RITM sys_id  -> " + taskVariable.getSys_id());
+
+				System.out.println("Request Type -> " + taskVariable.getVariables_request_type());
+
+				System.out.println("User email   -> " + taskVariable.getVariables_email());
+				System.out.println("User fName   -> " + taskVariable.getVariables_firstname());
+				System.out.println("User lName   -> " + taskVariable.getVariables_surname());
+
+				System.out.println("User new email   -> " + taskVariable.getVariables_ccd_account_new_email_address());
+				System.out.println("User new fName   -> " + taskVariable.getVariables_ccd_account_new_first_name());
+				System.out.println("User new lName   -> " + taskVariable.getVariables_ccd_account_new_surname());
+
+				System.out.println("Group to remove -> " + taskVariable.getVariables_ccd_account_profile_remove_roles());
 				System.out.println("Group to add -> " + taskVariable.getVariables_ccd_account_profile_add());
+
+				System.out.println("User to mirror -> " + taskVariable.getVariables_var_set_user_to_mirror());
+
 				System.out.println("RITM Variables -> " + taskVariable);
 
 				System.out.println("Doing the IDAM stuff, i.e. add, remove etc.");

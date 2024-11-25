@@ -16,10 +16,17 @@ public class ApplicationParams {
         return snowPassword;
     }
 
+    public String getSnowApiUrl() {
+        return snowApiUrl;
+    }
+
     @Value("${snow.api.username}")
     private String snowUsername;
 
     @Value("${snow.api.password}")
     private String snowPassword;
+
+    @Value("${snow.api.url}")
+    private String snowApiUrl;
 
 }

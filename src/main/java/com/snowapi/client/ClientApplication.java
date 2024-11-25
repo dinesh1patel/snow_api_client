@@ -32,7 +32,8 @@ public class ClientApplication implements CommandLineRunner {
 
 		ConsumeWebService consumeWebService = new ConsumeWebService(
 				applicationParams.getSnowUsername(),
-				applicationParams.getSnowPassword()
+				applicationParams.getSnowPassword(),
+				applicationParams.getSnowApiUrl()
 		);
 
         ResultTask resultAllTasks = consumeWebService.getTasksAssignedToCFTL2();

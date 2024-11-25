@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -28,7 +27,8 @@ class ClientApplicationTests {
 	void uploadFileToIncidentReturnsSuccess() throws Exception {
 		ConsumeWebService consumeWebService = new ConsumeWebService(
 				applicationParams.getSnowUsername(),
-				applicationParams.getSnowPassword()
+				applicationParams.getSnowPassword(),
+				applicationParams.getSnowApiUrl()
 		);
 
 		String result = consumeWebService.uploadAttachment("c89862d51b065e50923afb25464bcbd0", "/Users/dineshpatel/Downloads/test.txt");

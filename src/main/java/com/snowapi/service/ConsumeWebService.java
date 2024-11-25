@@ -26,22 +26,25 @@ public class ConsumeWebService {
 
     private final String username;
     private final String password;
+    private final String url;
 
     RestTemplate restTemplate = new RestTemplate();
 
     public ConsumeWebService() {
         this.username = "null";
         this.password = "null";
+        this.url = "null";
     }
 
-    public ConsumeWebService(String username, String password) {
+    public ConsumeWebService(String username, String password, String url) {
         this.username = username;
         this.password = password;
+        this.url = url;
     }
 
     public ResultTask getTaskBySysId(String sys_id)
     {
-        String target = "https://mojcppprod.service-now.com/api/now/table/task";
+        String target = url + "/table/task";
 
         HttpHeaders headers = getHttpHeaders();
         HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
@@ -61,7 +64,7 @@ public class ConsumeWebService {
 
     public ResultTask getTasksAssignedToCFTL2()
     {
-        String target = "https://mojcppprod.service-now.com/api/now/table/sc_task";
+        String target =  url + "/table/sc_task";
 
         HttpHeaders headers = getHttpHeaders();
         HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
@@ -83,7 +86,7 @@ public class ConsumeWebService {
 
     public ResultTaskVariable getAllVariablesForRITMs(String requestItemId)
     {
-        String target = "https://mojcppprod.service-now.com/api/now/table/sc_req_item";
+        String target =  url + "/table/sc_req_item";
 
         HttpHeaders headers = getHttpHeaders();
         HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
@@ -120,7 +123,7 @@ public class ConsumeWebService {
 
     public String uploadAttachment(String sys_id, String file) throws Exception {
 
-        String target = "https://mojcppprod.service-now.com/api/now/attachment/upload";
+        String target =  url + "/attachment/upload";
 
         HttpHeaders headers = getHttpHeaders();
 

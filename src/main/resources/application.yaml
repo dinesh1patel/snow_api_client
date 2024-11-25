@@ -6,3 +6,4 @@ snow:
   api:
     username: ${SNOW_API_USERNAME:<username_here>}
     password: ${SNOW_API_PASSWORD:<password_here>}
+    url: ${SNOW_API_URL:https://mojcppprod.service-now.com/api/now}

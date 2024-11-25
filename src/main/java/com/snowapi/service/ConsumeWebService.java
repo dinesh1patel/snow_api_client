@@ -1,6 +1,7 @@
 package com.snowapi.service;
 
 import com.snowapi.constants.Constants;
+import com.snowapi.enums.State;
 import com.snowapi.model.ResultTask;
 import com.snowapi.model.ResultTaskVariable;
 import org.springframework.core.io.FileSystemResource;
@@ -17,8 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.google.gson.Gson;
-
-import java.io.File;
 import java.util.*;
 
 @Service
@@ -165,5 +164,26 @@ public class ConsumeWebService {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
+    }
+
+    public String updateTaskState(String task_sys_id, State state) {
+        String target =  url + "/table/task/" + task_sys_id;
+
+        HttpHeaders headers = getHttpHeaders();
+
+        String body = "{\"state\":" + "\"" + state.getState() + "\"}";
+
+        HttpEntity<String> requestEntity = new HttpEntity<String>(body,headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(target, HttpMethod.PUT,requestEntity,
+                String.class);
+
+        System.out.println(response.getBody());
+        System.out.println(response.getStatusCode());
+        System.out.println(response.getStatusCodeValue());
+
+        String json =  response.getBody();
+
+        return json;
     }
 }

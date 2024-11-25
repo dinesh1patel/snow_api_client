@@ -1,5 +1,6 @@
 package com.snowapi.client;
 
+import com.snowapi.enums.State;
 import com.snowapi.service.ConsumeWebService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,18 @@ class ClientApplicationTests {
 		);
 
 		String result = consumeWebService.uploadAttachment("c89862d51b065e50923afb25464bcbd0", "/Users/dineshpatel/Downloads/test.txt");
+		assert result.contains("CREATED");
+	}
+
+	@Test
+	void closeTaskAsCompletedReturnsSuccess() throws Exception {
+		ConsumeWebService consumeWebService = new ConsumeWebService(
+				applicationParams.getSnowUsername(),
+				applicationParams.getSnowPassword(),
+				applicationParams.getSnowApiUrl()
+		);
+
+		String result = consumeWebService.updateTaskState("c89862d51b065e50923afb25464bcbd0", State.CLOSED_COMPLETE);
 		assert result.contains("CREATED");
 	}
 

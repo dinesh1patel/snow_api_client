@@ -166,7 +166,7 @@ public class ConsumeWebService {
         return headers;
     }
 
-    public String updateTaskState(String task_sys_id, State state) {
+    public ResponseEntity<String> updateTaskState(String task_sys_id, State state) {
         String target =  url + "/table/task/" + task_sys_id;
 
         HttpHeaders headers = getHttpHeaders();
@@ -182,8 +182,6 @@ public class ConsumeWebService {
         System.out.println(response.getStatusCode());
         System.out.println(response.getStatusCodeValue());
 
-        String json =  response.getBody();
-
-        return json;
+        return response;
     }
 }

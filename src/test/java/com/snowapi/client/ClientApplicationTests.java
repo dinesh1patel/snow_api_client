@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,8 +45,8 @@ class ClientApplicationTests {
 				applicationParams.getSnowApiUrl()
 		);
 
-		String result = consumeWebService.updateTaskState("c89862d51b065e50923afb25464bcbd0", State.CLOSED_COMPLETE);
-		assert result.contains("CREATED");
+		ResponseEntity<String> result = consumeWebService.updateTaskState("c89862d51b065e50923afb25464bcbd0", State.CLOSED_COMPLETE);
+		assert result.getStatusCode().is2xxSuccessful();
 	}
 
 }

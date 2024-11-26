@@ -154,18 +154,6 @@ public class ConsumeWebService {
         return "" + responseEntity;
     }
 
-    private HttpHeaders getHttpHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        String authStr = this.username + ":" + this.password;
-
-        String base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes());
-
-        headers.add("Authorization", "Basic " + base64Creds);
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return headers;
-    }
-
     public ResponseEntity<String> updateTaskState(String task_sys_id, State state) {
         String target =  url + "/table/task/" + task_sys_id;
 
@@ -183,5 +171,17 @@ public class ConsumeWebService {
         System.out.println(response.getStatusCodeValue());
 
         return response;
+    }
+
+    private HttpHeaders getHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        String authStr = this.username + ":" + this.password;
+
+        String base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes());
+
+        headers.add("Authorization", "Basic " + base64Creds);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 }

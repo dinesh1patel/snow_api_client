@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = {ApplicationParams.class, ConsumeWebService.class})
 class ClientApplicationTests {
 
+	private static final String TASK_SYS_ID = "c89862d51b065e50923afb25464bcbd0";
+
 	@Autowired
 	private ApplicationParams applicationParams;
 
@@ -33,7 +35,7 @@ class ClientApplicationTests {
 				applicationParams.getSnowApiUrl()
 		);
 
-		String result = consumeWebService.uploadAttachment("c89862d51b065e50923afb25464bcbd0", "/Users/dineshpatel/Downloads/test.txt");
+		String result = consumeWebService.uploadAttachment(TASK_SYS_ID, "/Users/dineshpatel/Downloads/test.txt");
 		assert result.contains("CREATED");
 	}
 
@@ -45,7 +47,7 @@ class ClientApplicationTests {
 				applicationParams.getSnowApiUrl()
 		);
 
-		ResponseEntity<String> result = consumeWebService.updateTaskState("c89862d51b065e50923afb25464bcbd0", State.CLOSED_COMPLETE);
+		ResponseEntity<String> result = consumeWebService.updateTaskState(TASK_SYS_ID, State.CLOSED_COMPLETE);
 		assert result.getStatusCode().is2xxSuccessful();
 	}
 
